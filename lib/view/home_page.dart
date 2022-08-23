@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/core/widgets/task_category_widget.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todoapp/core/widgets/category_task_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
@@ -20,9 +21,10 @@ class HomePage extends StatelessWidget {
                 child: Text(
                   "To Do List",
                   style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.green.shade300),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.green.shade300,
+                  ),
                 ),
               ),
               Expanded(
@@ -37,8 +39,8 @@ class HomePage extends StatelessWidget {
                     ),
                     itemCount: 4,
                     itemBuilder: (context, index) {
-                      return TaskCategoryWidget(
-                        categoryIconicColor: Colors.red,
+                      return CategoryTaskWidget(
+                        categoryIconicColor: Colors.green,
                       );
                     },
                   ),
@@ -47,13 +49,15 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.large(
-        child: const Icon(
-          Icons.add,
-          size: 35,
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            size: 35,
+          ),
+          onPressed: () {
+            Modular.to.pushNamed("/addtask");
+          },
         ),
-        onPressed: () {},
       ),
     );
   }

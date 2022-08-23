@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'TodoApp',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
