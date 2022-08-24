@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/core/components/category_info_data.dart';
+import 'package:todoapp/core/components/my_text_styles.dart';
 import 'package:todoapp/core/widgets/my_circle_widget.dart';
 
 class AddTaskPage extends StatelessWidget {
@@ -103,10 +104,7 @@ class AddTaskPage extends StatelessWidget {
             ),
             Text(
               CategoryInfoData.categoryData[index]["name"],
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
+              style: AddTaskPageStyles.instance.categoryName,
             ),
           ],
         ),

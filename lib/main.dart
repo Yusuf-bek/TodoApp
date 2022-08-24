@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/myapp_widget.dart';
-import 'package:todoapp/service/manage_tasks_service.dart';
+import 'package:todoapp/service/task_add_service.dart';
 import 'package:todoapp/view/add_task_page.dart';
 import 'package:todoapp/view/home_page.dart';
 import 'package:todoapp/view/open_category_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ManageTasksService.initialize();
+  await TaskAddService.initialize();
   runApp(
     ModularApp(
       module: AppModule(),

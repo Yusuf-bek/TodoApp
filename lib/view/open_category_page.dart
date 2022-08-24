@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todoapp/core/components/my_text_styles.dart';
 import 'package:todoapp/core/widgets/task_widget.dart';
 
 class OpenCategoryPage extends StatelessWidget {
@@ -53,10 +54,7 @@ class OpenCategoryPage extends StatelessWidget {
                           ),
                           Text(
                             categoryData[1],
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: OpenCategoryPageStyles.instance.categoryTitle 
                           ),
                         ],
                       )

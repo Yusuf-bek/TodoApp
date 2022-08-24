@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/components/my_text_styles.dart';
 import 'package:todoapp/core/widgets/my_circle_widget.dart';
 
 class TaskWidget extends StatelessWidget {
@@ -30,14 +31,9 @@ class TaskWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           MyCircleWidget(),
-          const Text(
-            "Money Deposit",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          Icon(
+          Text("Money Deposit",
+              style: OpenCategoryPageStyles.instance.taskTitle),
+          const Icon(
             Icons.done,
             color: Colors.green,
           ),

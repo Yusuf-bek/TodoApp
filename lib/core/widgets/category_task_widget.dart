@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todoapp/core/components/my_text_styles.dart';
 
 // ignore: must_be_immutable
 class CategoryTaskWidget extends StatelessWidget {
@@ -57,21 +58,8 @@ class CategoryTaskWidget extends StatelessWidget {
                   color: categoryColor,
                   size: 30,
                 ),
-                const Text(
-                  "3 tasks",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
-                  ),
-                ),
-                Text(
-                  categoryName,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text("3 tasks", style: HomePageStyles.instance.countTasks),
+                Text(categoryName, style: HomePageStyles.instance.categoryName),
               ],
             ),
           ],

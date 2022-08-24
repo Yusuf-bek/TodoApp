@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/core/components/category_info_data.dart';
+import 'package:todoapp/core/components/my_text_styles.dart';
 import 'package:todoapp/core/widgets/category_task_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,11 +22,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Text(
                   "To Do List",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.green.shade300,
-                  ),
+                  style: HomePageStyles.instance.homePageHeader
                 ),
               ),
               Expanded(

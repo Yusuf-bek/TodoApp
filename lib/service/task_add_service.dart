@@ -3,7 +3,7 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todoapp/collection/mytask.dart';
 
-class ManageTasksService {
+class TaskAddService {
   static late Directory direc;
   static late Isar isar;
 
