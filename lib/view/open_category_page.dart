@@ -3,7 +3,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/core/widgets/task_widget.dart';
 
 class OpenCategoryPage extends StatelessWidget {
-  const OpenCategoryPage({Key? key}) : super(key: key);
+  List categoryData;
+  OpenCategoryPage({
+    Key? key,
+    required this.categoryData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +44,16 @@ class OpenCategoryPage extends StatelessWidget {
                             height: 35,
                             width: 6,
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: categoryData[0],
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
-                          const Text(
-                            "Finance",
-                            style: TextStyle(
+                          Text(
+                            categoryData[1],
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -77,7 +81,9 @@ class OpenCategoryPage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Modular.to.pushNamed("/addtask");
+            Modular.to.pushNamed(
+              "/addtask",
+            );
           },
           child: const Icon(
             Icons.add,

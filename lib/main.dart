@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:todoapp/collection/mytask.dart';
 import 'package:todoapp/myapp_widget.dart';
 import 'package:todoapp/service/manage_tasks_service.dart';
 import 'package:todoapp/view/add_task_page.dart';
@@ -29,15 +26,17 @@ class AppModule extends Module {
         // HomePage
         ChildRoute(
           "/",
-          child: (context, args) => HomePage(),
+          child: (context, args) => const HomePage(),
         ),
         ChildRoute(
           "/opencategory",
-          child: (context, args) => const OpenCategoryPage(),
+          child: (context, args) => OpenCategoryPage(categoryData: args.data),
         ),
         ChildRoute(
           "/addtask",
-          child: (context, args) => const AddTaskPage(),
+          child: (context, args) => const AddTaskPage(
+            
+          ),
         ),
       ];
 }

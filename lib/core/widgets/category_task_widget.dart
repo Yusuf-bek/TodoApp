@@ -3,17 +3,25 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 // ignore: must_be_immutable
 class CategoryTaskWidget extends StatelessWidget {
-  Color categoryIconicColor;
+  Color categoryColor;
+  String categoryName;
   CategoryTaskWidget({
     Key? key,
-    required this.categoryIconicColor,
+    required this.categoryColor,
+    required this.categoryName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Modular.to.pushNamed("/opencategory");
+        Modular.to.pushNamed(
+          "/opencategory",
+          arguments: [
+            categoryColor,
+            categoryName,
+          ],
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.3,
@@ -33,7 +41,7 @@ class CategoryTaskWidget extends StatelessWidget {
               height: double.infinity,
               width: 6,
               decoration: BoxDecoration(
-                color: categoryIconicColor,
+                color: categoryColor,
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
@@ -46,7 +54,7 @@ class CategoryTaskWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.calendar_today,
-                  color: categoryIconicColor,
+                  color: categoryColor,
                   size: 30,
                 ),
                 const Text(
@@ -57,9 +65,9 @@ class CategoryTaskWidget extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                const Text(
-                  "Work",
-                  style: TextStyle(
+                Text(
+                  categoryName,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

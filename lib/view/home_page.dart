@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todoapp/core/components/category_info_data.dart';
 import 'package:todoapp/core/widgets/category_task_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,7 +41,10 @@ class HomePage extends StatelessWidget {
                     itemCount: 4,
                     itemBuilder: (context, index) {
                       return CategoryTaskWidget(
-                        categoryIconicColor: Colors.green,
+                        categoryColor: CategoryInfoData.categoryColors[
+                            CategoryInfoData.categoryData[index]["colorIndex"]],
+                        categoryName: CategoryInfoData.categoryData[index]
+                            ["name"],
                       );
                     },
                   ),
@@ -55,7 +59,7 @@ class HomePage extends StatelessWidget {
             size: 35,
           ),
           onPressed: () {
-            Modular.to.pushNamed("/addtask");
+            Modular.to.pushNamed("/addtask",);
           },
         ),
       ),

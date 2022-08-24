@@ -28,9 +28,9 @@ class TaskWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
+        children: [
           MyCircleWidget(),
-          Text(
+          const Text(
             "Money Deposit",
             style: TextStyle(
               fontSize: 15,

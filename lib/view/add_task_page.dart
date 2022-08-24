@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todoapp/core/components/category_info_data.dart';
 import 'package:todoapp/core/widgets/my_circle_widget.dart';
 
 class AddTaskPage extends StatelessWidget {
@@ -58,8 +59,11 @@ class AddTaskPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                   itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return newTaskTypeWidget(context);
+                  itemBuilder: (contextG, indexG) {
+                    return newTaskTypeWidget(
+                      context: contextG,
+                      index: indexG,
+                    );
                   },
                 ),
               ),
@@ -74,7 +78,10 @@ class AddTaskPage extends StatelessWidget {
     );
   }
 
-  InkWell newTaskTypeWidget(BuildContext context) {
+  InkWell newTaskTypeWidget({
+    required BuildContext context,
+    required int index,
+  }) {
     return InkWell(
       onTap: () {},
       child: Container(
@@ -87,13 +94,16 @@ class AddTaskPage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const MyCircleWidget(),
+            MyCircleWidget(
+              circleColor: CategoryInfoData.categoryColors[
+                  CategoryInfoData.categoryData[index]["colorIndex"]],
+            ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.04,
             ),
-            const Text(
-              "Work",
-              style: TextStyle(
+            Text(
+              CategoryInfoData.categoryData[index]["name"],
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),
