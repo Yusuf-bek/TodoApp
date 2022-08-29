@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/myapp_widget.dart';
-import 'package:todoapp/service/task_add_service.dart';
-import 'package:todoapp/view/add_task_page.dart';
+import 'package:todoapp/service/initialize_task_service.dart';
+import 'package:todoapp/view/new_task_page.dart';
 import 'package:todoapp/view/home_page.dart';
 import 'package:todoapp/view/open_category_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await TaskAddService.initialize();
+  await InitializeTaskService.instance.initialize();
   runApp(
     ModularApp(
       module: AppModule(),
@@ -23,7 +23,6 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        // HomePage
         ChildRoute(
           "/",
           child: (context, args) => const HomePage(),
@@ -34,9 +33,7 @@ class AppModule extends Module {
         ),
         ChildRoute(
           "/addtask",
-          child: (context, args) => const AddTaskPage(
-            
-          ),
+          child: (context, args) => const AddTaskPage(),
         ),
       ];
 }

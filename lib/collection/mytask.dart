@@ -6,6 +6,9 @@ part "mytask.g.dart";
 class MyTask {
   Id id = Isar.autoIncrement;
 
+  @Name("categoryIndex")
+  late int categoryIndex;
+
   @Name("title")
   late String title;
 

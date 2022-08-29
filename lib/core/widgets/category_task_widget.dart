@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/core/components/my_text_styles.dart';
+import 'package:todoapp/service/get_count_tasks.dart';
 
 // ignore: must_be_immutable
 class CategoryTaskWidget extends StatelessWidget {
@@ -14,57 +15,63 @@ class CategoryTaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Modular.to.pushNamed(
-          "/opencategory",
-          arguments: [
-            categoryColor,
-            categoryName,
-          ],
-        );
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.3,
-        height: MediaQuery.of(context).size.height * 0.4,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10),
-            bottomRight: Radius.circular(10),
-            topLeft: Radius.circular(5),
-            bottomLeft: Radius.circular(5),
+    return FutureBuilder(
+      future: GetCountTasks().getCount(),
+      builder: (context, snapshot) {
+        return InkWell(
+        onTap: () {
+          Modular.to.pushNamed(
+            "/opencategory",
+            arguments: [
+              categoryColor,
+              categoryName,
+            ],
+          );
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.3,
+          height: MediaQuery.of(context).size.height * 0.4,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+              topLeft: Radius.circular(5),
+              bottomLeft: Radius.circular(5),
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                height: double.infinity,
+                width: 6,
+                decoration: BoxDecoration(
+                  color: categoryColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.04,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.calendar_today,
+                    color: categoryColor,
+                    size: 30,
+                  ),
+                  Text(snapshot.data.toString(),
+                      style: HomePageStyles.instance.countTasks),
+                  Text(categoryName, style: HomePageStyles.instance.categoryName),
+                ],
+              ),
+            ],
           ),
         ),
-        child: Row(
-          children: [
-            Container(
-              height: double.infinity,
-              width: 6,
-              decoration: BoxDecoration(
-                color: categoryColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.04,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.calendar_today,
-                  color: categoryColor,
-                  size: 30,
-                ),
-                Text("3 tasks", style: HomePageStyles.instance.countTasks),
-                Text(categoryName, style: HomePageStyles.instance.categoryName),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+      );
+   
+      }, );
   }
 }

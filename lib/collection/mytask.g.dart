@@ -17,13 +17,18 @@ const MyTaskSchema = CollectionSchema(
   name: r'MyTask',
   id: -6526062100323759997,
   properties: {
-    r'isDone': PropertySchema(
+    r'categoryIndex': PropertySchema(
       id: 0,
+      name: r'categoryIndex',
+      type: IsarType.long,
+    ),
+    r'isDone': PropertySchema(
+      id: 1,
       name: r'isDone',
       type: IsarType.bool,
     ),
     r'title': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'title',
       type: IsarType.string,
     )
@@ -61,8 +66,9 @@ int _myTaskSerializeNative(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.isDone);
-  writer.writeString(offsets[1], object.title);
+  writer.writeLong(offsets[0], object.categoryIndex);
+  writer.writeBool(offsets[1], object.isDone);
+  writer.writeString(offsets[2], object.title);
   return writer.usedBytes;
 }
 
@@ -73,9 +79,10 @@ MyTask _myTaskDeserializeNative(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = MyTask();
+  object.categoryIndex = reader.readLong(offsets[0]);
   object.id = id;
-  object.isDone = reader.readBool(offsets[0]);
-  object.title = reader.readString(offsets[1]);
+  object.isDone = reader.readBool(offsets[1]);
+  object.title = reader.readString(offsets[2]);
   return object;
 }
 
@@ -88,8 +95,10 @@ P _myTaskDeserializePropNative<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -101,7 +110,7 @@ Object _myTaskSerializeWeb(IsarCollection<MyTask> collection, MyTask object) {
 }
 
 MyTask _myTaskDeserializeWeb(IsarCollection<MyTask> collection, Object jsObj) {
-  /*final object = MyTask();object.id = IsarNative.jsObjectGet(jsObj, r'id') ?? (double.negativeInfinity as int);object.isDone = IsarNative.jsObjectGet(jsObj, r'isDone') ?? false;object.title = IsarNative.jsObjectGet(jsObj, r'title') ?? '';*/
+  /*final object = MyTask();object.categoryIndex = IsarNative.jsObjectGet(jsObj, r'categoryIndex') ?? (double.negativeInfinity as int);object.id = IsarNative.jsObjectGet(jsObj, r'id') ?? (double.negativeInfinity as int);object.isDone = IsarNative.jsObjectGet(jsObj, r'isDone') ?? false;object.title = IsarNative.jsObjectGet(jsObj, r'title') ?? '';*/
   //return object;
   throw UnimplementedError();
 }
@@ -205,6 +214,59 @@ extension MyTaskQueryWhere on QueryBuilder<MyTask, MyTask, QWhereClause> {
 }
 
 extension MyTaskQueryFilter on QueryBuilder<MyTask, MyTask, QFilterCondition> {
+  QueryBuilder<MyTask, MyTask, QAfterFilterCondition> categoryIndexEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'categoryIndex',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MyTask, MyTask, QAfterFilterCondition> categoryIndexGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'categoryIndex',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MyTask, MyTask, QAfterFilterCondition> categoryIndexLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'categoryIndex',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MyTask, MyTask, QAfterFilterCondition> categoryIndexBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'categoryIndex',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<MyTask, MyTask, QAfterFilterCondition> idEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -385,6 +447,18 @@ extension MyTaskQueryObject on QueryBuilder<MyTask, MyTask, QFilterCondition> {}
 extension MyTaskQueryLinks on QueryBuilder<MyTask, MyTask, QFilterCondition> {}
 
 extension MyTaskQuerySortBy on QueryBuilder<MyTask, MyTask, QSortBy> {
+  QueryBuilder<MyTask, MyTask, QAfterSortBy> sortByCategoryIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MyTask, MyTask, QAfterSortBy> sortByCategoryIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryIndex', Sort.desc);
+    });
+  }
+
   QueryBuilder<MyTask, MyTask, QAfterSortBy> sortByIsDone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDone', Sort.asc);
@@ -411,6 +485,18 @@ extension MyTaskQuerySortBy on QueryBuilder<MyTask, MyTask, QSortBy> {
 }
 
 extension MyTaskQuerySortThenBy on QueryBuilder<MyTask, MyTask, QSortThenBy> {
+  QueryBuilder<MyTask, MyTask, QAfterSortBy> thenByCategoryIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MyTask, MyTask, QAfterSortBy> thenByCategoryIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryIndex', Sort.desc);
+    });
+  }
+
   QueryBuilder<MyTask, MyTask, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -449,6 +535,12 @@ extension MyTaskQuerySortThenBy on QueryBuilder<MyTask, MyTask, QSortThenBy> {
 }
 
 extension MyTaskQueryWhereDistinct on QueryBuilder<MyTask, MyTask, QDistinct> {
+  QueryBuilder<MyTask, MyTask, QDistinct> distinctByCategoryIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'categoryIndex');
+    });
+  }
+
   QueryBuilder<MyTask, MyTask, QDistinct> distinctByIsDone() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isDone');
@@ -467,6 +559,12 @@ extension MyTaskQueryProperty on QueryBuilder<MyTask, MyTask, QQueryProperty> {
   QueryBuilder<MyTask, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<MyTask, int, QQueryOperations> categoryIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'categoryIndex');
     });
   }
 

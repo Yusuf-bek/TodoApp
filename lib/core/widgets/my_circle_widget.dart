@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyCircleWidget extends StatelessWidget {
   Color? circleColor = Colors.green;
   MyCircleWidget({Key? key, this.circleColor}) : super(key: key);
