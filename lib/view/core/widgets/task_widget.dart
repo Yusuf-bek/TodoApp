@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/core/components/my_text_styles.dart';
-import 'package:todoapp/core/widgets/my_circle_widget.dart';
+import 'package:todoapp/view/core/components/my_text_styles.dart';
+import 'package:todoapp/view/core/widgets/my_circle_widget.dart';
 
 class TaskWidget extends StatelessWidget {
   const TaskWidget({Key? key}) : super(key: key);

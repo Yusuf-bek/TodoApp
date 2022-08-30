@@ -39,6 +39,9 @@ dependencies:
   path_provider: ^2.0.11
   isar: ^3.0.0-dev.10
   isar_flutter_libs: ^3.0.0-dev.10
+  bloc: ^8.1.0
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.1
 
   
 

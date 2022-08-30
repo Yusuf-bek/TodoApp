@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/view/home_page.dart';
 
 abstract class MyTextStyles {}
 
