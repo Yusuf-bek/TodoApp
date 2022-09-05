@@ -3,7 +3,15 @@ import 'package:todoapp/view/core/components/my_text_styles.dart';
 import 'package:todoapp/view/core/widgets/my_circle_widget.dart';
 
 class TaskWidget extends StatelessWidget {
-  const TaskWidget({Key? key}) : super(key: key);
+  int index;
+  String title;
+  int categoryIndex;
+  TaskWidget({
+    Key? key,
+    required this.index,
+    required this.title,
+    required this.categoryIndex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class TaskWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           MyCircleWidget(),
-          Text("Money Deposit",
+          Text("$title $categoryIndex",
               style: OpenCategoryPageStyles.instance.taskTitle),
           const Icon(
             Icons.done,

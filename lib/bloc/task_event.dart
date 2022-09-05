@@ -8,23 +8,27 @@ abstract class TaskEvent extends Equatable {
 }
 
 class LoadAllTasks extends TaskEvent {
-  final List<MyTask> tasks;
-
-  const LoadAllTasks(this.tasks);
-
-  @override
-  List<Object?> get props => [tasks];
+  const LoadAllTasks();
 }
+
+class TaskEmitToInitial extends TaskEvent {}
 
 class AddTask extends TaskEvent {
   final MyTask task;
 
-  AddTask({required this.task}) {
-    TaskService.addTask(myTask: task);
-  }
+  const AddTask(this.task);
 
   @override
   List<Object?> get props => [task];
+}
+
+class ChooseCategory extends TaskEvent {
+  final int index;
+
+  const ChooseCategory(this.index);
+
+  @override
+  List<Object?> get props => [index];
 }
 
 class RemoveTask extends TaskEvent {

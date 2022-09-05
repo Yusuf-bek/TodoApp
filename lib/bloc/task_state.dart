@@ -5,6 +5,7 @@ abstract class TaskState extends Equatable {
 
   @override
   List<Object?> get props => [];
+
 }
 
 class TaskInitial extends TaskState {}
@@ -12,9 +13,7 @@ class TaskInitial extends TaskState {}
 class TaskLoaded extends TaskState {
   final List<MyTask> tasks;
 
-  const TaskLoaded({
-    required this.tasks,
-  });
+  const TaskLoaded({required this.tasks});
 
   @override
   List<Object?> get props => [];
@@ -23,20 +22,25 @@ class TaskLoaded extends TaskState {
 class TaskAdded extends TaskState {
   final List<MyTask> tasks;
 
-  const TaskAdded({
-    required this.tasks,
-  });
+  const TaskAdded({required this.tasks});
 
   @override
   List<Object?> get props => [tasks];
 }
 
+class TaskChoosed extends TaskState {
+  final int choosenIndex;
+
+  const TaskChoosed(this.choosenIndex);
+
+  @override
+  List<Object?> get props => [choosenIndex];
+}
+
 class TaskRemoved extends TaskState {
   final List<MyTask> tasks;
 
-  const TaskRemoved({
-    required this.tasks,
-  });
+  const TaskRemoved({required this.tasks});
 
   @override
   List<Object?> get props => [tasks];

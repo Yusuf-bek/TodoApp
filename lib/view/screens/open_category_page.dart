@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/bloc/task_bloc.dart';
-import 'package:todoapp/collection/mytask.dart';
 import 'package:todoapp/view/core/components/my_text_styles.dart';
 import 'package:todoapp/view/core/widgets/task_widget.dart';
 
@@ -20,33 +19,27 @@ class OpenCategoryPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder<TaskBloc, TaskState>(
+          bloc: Modular.get<TaskBloc>(),
           builder: (context, state) {
             if (state is TaskInitial) {
               return const Center(
                 child: CupertinoActivityIndicator(),
               );
             } else if (state is TaskLoaded) {
-              return Center(
-                child: Text(
-                  state.tasks.length.toString(),
-                ),
-              );
+              return pageBody(context, state.tasks);
+            } else if (state is TaskAdded) {
+              return pageBody(context, state.tasks);
             }
 
-            return const SizedBox();
+            return Center(
+              child: Text(state.toString()),
+            );
           },
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Modular.to.pushNamed(
-            //   "/addtask",
-            // );
-            TaskBloc().add(
-              AddTask(
-                task: MyTask()
-                  ..categoryIndex = 1
-                  ..title = "helloo",
-              ),
+            Modular.to.pushNamed(
+              "/addtask",
             );
           },
           child: const Icon(
@@ -58,7 +51,7 @@ class OpenCategoryPage extends StatelessWidget {
     );
   }
 
-  Padding pageBody(BuildContext context) {
+  Padding pageBody(BuildContext context, List myList) {
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).size.width * 0.04,
@@ -74,9 +67,13 @@ class OpenCategoryPage extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
               child: ListView.builder(
-                //! itemCount
+                itemCount: myList.length,
                 itemBuilder: (context, index) {
-                  return const TaskWidget();
+                  return TaskWidget(
+                    categoryIndex: myList[index].categoryIndex,
+                    title: myList[index].title,
+                    index: index,
+                  );
                 },
               ),
             ),

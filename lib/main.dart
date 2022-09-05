@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/bloc/task_bloc.dart';
+import 'package:todoapp/cubit/category_cubit.dart';
 import 'package:todoapp/myapp_widget.dart';
 import 'package:todoapp/service/initialize_task_service.dart';
 import 'package:todoapp/view/screens/new_task_page.dart';
@@ -15,17 +15,21 @@ void main() async {
   runApp(
     ModularApp(
       module: AppModule(),
-      child: BlocProvider(
-        create: (context) => TaskBloc()..add(const LoadAllTasks([])),
-        child: const MyApp(),
-      ),
+      child: const MyApp(),
     ),
   );
 }
 
 class AppModule extends Module {
   @override
-  List<Bind> get binds => [];
+  List<Bind> get binds => [
+        Bind.singleton(
+          (i) => TaskBloc()..add(const LoadAllTasks()),
+        ),
+        Bind.singleton(
+          (i) => CategoryCubit(CategoryInitial()),
+        ),
+      ];
 
   @override
   List<ModularRoute> get routes => [
@@ -39,7 +43,7 @@ class AppModule extends Module {
         ),
         ChildRoute(
           "/addtask",
-          child: (context, args) => const AddTaskPage(),
+          child: (context, args) => AddTaskPage(),
         ),
       ];
 }

@@ -11,21 +11,31 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<LoadAllTasks>(
       (event, emit) async {
         List<MyTask> tasks = await TaskService.getAllData();
-        await Future.delayed(
-          const Duration(seconds: 1),
-        ).then(
-          (value) => emit(
-            TaskLoaded(tasks: tasks),
-          ),
+        await Future.delayed(const Duration(milliseconds: 500)).then(
+          (value) => emit(TaskLoaded(tasks: tasks)),
         );
+      },
+    );
+
+    on<TaskEmitToInitial>(
+      (event, emit) {
+        emit(TaskInitial());
       },
     );
 
     on<AddTask>(
       (event, emit) async {
-        List<MyTask> tasks = await TaskService.getAllData();
-        emit(TaskAdded(tasks: tasks));
-        add(LoadAllTasks(tasks));
+        await TaskService.addTask(myTask: event.task).then((value) async {
+          List<MyTask> tasks = await TaskService.getAllData();
+          emit(TaskAdded(tasks: tasks));
+         
+        });
+      },
+    );
+
+    on<ChooseCategory>(
+      (event, emit) {
+        emit(TaskChoosed(event.index));
       },
     );
 
