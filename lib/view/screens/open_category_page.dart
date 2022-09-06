@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/bloc/task_bloc.dart';
 import 'package:todoapp/view/core/components/my_text_styles.dart';
+import 'package:todoapp/view/core/extensions/mediaquery_height_width_extension.dart';
 import 'package:todoapp/view/core/widgets/task_widget.dart';
 
 // ignore: must_be_immutable
@@ -54,9 +55,9 @@ class OpenCategoryPage extends StatelessWidget {
   Padding pageBody(BuildContext context, List myList) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.width * 0.04,
-        left: MediaQuery.of(context).size.width * 0.07,
-        right: MediaQuery.of(context).size.width * 0.07,
+        top: context.width * 0.04,
+        left: context.width * 0.07,
+        right: context.width * 0.07,
       ),
       child: Column(
         children: [
@@ -87,7 +88,7 @@ class OpenCategoryPage extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width,
+        width: context.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

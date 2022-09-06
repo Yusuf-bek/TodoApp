@@ -6,6 +6,7 @@ import 'package:todoapp/collection/mytask.dart';
 import 'package:todoapp/cubit/category_cubit.dart';
 import 'package:todoapp/view/core/components/category_info_data.dart';
 import 'package:todoapp/view/core/components/my_text_styles.dart';
+import 'package:todoapp/view/core/extensions/mediaquery_height_width_extension.dart';
 import 'package:todoapp/view/core/widgets/my_circle_widget.dart';
 
 // ignore: must_be_immutable
@@ -44,14 +45,14 @@ class AddTaskPage extends StatelessWidget {
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.05,
+              horizontal: context.width * 0.05,
             ),
             child: Column(
               children: [
                 Expanded(
                   flex: 1,
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: context.width,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -72,7 +73,7 @@ class AddTaskPage extends StatelessWidget {
                   child: BlocBuilder(
                     bloc: CategoryCubit(CategoryInitial()),
                     builder: (context, state) => SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: context.width,
                       child: ListView.builder(
                         itemCount: 4,
                         itemBuilder: (contextG, indexG) {

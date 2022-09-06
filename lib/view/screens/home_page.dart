@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/view/core/components/category_info_data.dart';
 import 'package:todoapp/view/core/components/my_text_styles.dart';
+import 'package:todoapp/view/core/extensions/mediaquery_height_width_extension.dart';
 import 'package:todoapp/view/core/widgets/category_task_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
 }
 
 Scaffold myScaffold(BuildContext context) {
+  
   return Scaffold(
     body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -23,8 +25,8 @@ Scaffold myScaffold(BuildContext context) {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.07,
-              bottom: MediaQuery.of(context).size.height * 0.07,
+              top: context.height * 0.07,
+              bottom: context.height * 0.07,
             ),
             child: Text(
               "To Do List",

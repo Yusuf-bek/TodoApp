@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todoapp/service/task_service.dart';
 import 'package:todoapp/view/core/components/my_text_styles.dart';
+import 'package:todoapp/view/core/extensions/mediaquery_height_width_extension.dart';
 
 // ignore: must_be_immutable
 class CategoryTaskWidget extends StatelessWidget {
@@ -51,7 +52,7 @@ class CategoryTaskWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.04,
+                  width: context.width * 0.04,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
